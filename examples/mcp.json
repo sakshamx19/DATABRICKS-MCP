@@ -1,0 +1,12 @@
+{
+  "mcpServers": {
+    "databricks": {
+      "command": "C:\\path\\to\\dbx-mcp\\.venv\\Scripts\\dbx-mcp.exe",
+      "args": ["--env-file", "C:\\path\\to\\dbx-mcp\\.env"],
+      "env": {
+        "DBX_MCP_READ_ONLY": "false",
+        "DBX_MCP_TOOLSETS": "all"
+      }
+    }
+  }
+}

@@ -1,0 +1,7 @@
+# Separate environment from the server: langchain-mcp-adapters requires mcp<2, while the
+# dbx-mcp server uses mcp 2.x. They talk over stdio, so the versions never conflict.
+langchain>=1.4
+langgraph>=1.2
+langchain-openai>=0.3
+langchain-mcp-adapters>=0.3
+python-dotenv>=1.0

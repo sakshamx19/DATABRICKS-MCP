@@ -1,0 +1,59 @@
+[build-system]
+requires = ["hatchling>=1.25"]
+build-backend = "hatchling.build"
+
+[project]
+name = "dbx-mcp"
+version = "0.1.0"
+description = "An independent, safety-first Model Context Protocol (MCP) server for Databricks."
+readme = "README.md"
+requires-python = ">=3.10"
+license = { text = "Apache-2.0" }
+authors = [{ name = "dbx-mcp contributors" }]
+keywords = ["databricks", "mcp", "model-context-protocol", "unity-catalog", "llm", "agents"]
+classifiers = [
+    "Development Status :: 3 - Alpha",
+    "Intended Audience :: Developers",
+    "License :: OSI Approved :: Apache Software License",
+    "Programming Language :: Python :: 3",
+    "Programming Language :: Python :: 3.10",
+    "Programming Language :: Python :: 3.11",
+    "Programming Language :: Python :: 3.12",
+    "Topic :: Database",
+]
+dependencies = [
+    "databricks-sdk>=0.146.0,<0.200",
+    "mcp>=2.3.0,<3",
+    "pydantic>=2.7,<3",
+    "python-dotenv>=1.0",
+]
+
+[project.optional-dependencies]
+pdf = ["xhtml2pdf>=0.2.16", "pypdf>=4"]
+dev = [
+    "pytest>=8",
+    "pytest-asyncio>=0.23",
+    "ruff>=0.6",
+]
+
+[project.scripts]
+dbx-mcp = "dbx_mcp.__main__:main"
+
+[tool.hatch.build.targets.wheel]
+packages = ["src/dbx_mcp"]
+
+[tool.pytest.ini_options]
+testpaths = ["tests"]
+asyncio_mode = "auto"
+markers = [
+    "integration: requires a real Databricks workspace (opt-in via DBX_MCP_RUN_INTEGRATION=1)",
+    "integration_write: creates/deletes real resources (opt-in via DBX_MCP_RUN_INTEGRATION_WRITE=1)",
+]
+
+[tool.ruff]
+line-length = 110
+target-version = "py310"
+
+[tool.ruff.lint]
+select = ["E", "F", "I", "B", "UP", "SIM"]
+ignore = ["E501", "B008"]
